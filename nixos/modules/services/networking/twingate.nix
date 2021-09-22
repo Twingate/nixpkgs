@@ -8,13 +8,13 @@ let
 in {
 
   options.services.twingate = {
-    enable = mkEnableOption "Twingate client daemon";
+    enable = mkEnableOption "Twingate Client daemon";
 
     package = mkOption {
       type = types.package;
       default = pkgs.twingate;
       defaultText = "pkgs.twingate";
-      description = "The package to use for twingate";
+      description = "The package to use for Twingate";
     };
   };
 
