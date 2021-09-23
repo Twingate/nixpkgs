@@ -45,7 +45,10 @@ stdenv.mkDerivation rec {
     description = "Twingate Remote Access Client";
     homepage = "https://twingate.com";
     license = licenses.unfree;
-    maintainers = with maintainers; [ kalbasit ];
+    maintainers = [ {
+        name = "Anton Shkurenko";
+        email = "anton@twingate.com";
+    } ];
     platforms = platforms.linux;
   };
 }
