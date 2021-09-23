@@ -15,7 +15,7 @@ stdenv.mkDerivation rec {
   version = "1.0.12";
   
   src = fetchurl {
-    url = "gs://twingate-prod-binaries/client/linux/DEB/1.0.12/twingate-amd64.deb";
+    url = "https://binaries.twingate.com/client/linux/DEB/1.0.12/twingate-amd64.deb";
     sha256 = "c9865fe6af150580b6d9541c1cb7d6205aa2afe97395dc37b10ba92067c6b935";
   };
 
