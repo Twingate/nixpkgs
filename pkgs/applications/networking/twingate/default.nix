@@ -42,12 +42,12 @@ stdenv.mkDerivation rec {
   '';
 
   meta = with lib; {
-    description = "Twingate Remote Access Client";
+    description = "Twingate Client";
     homepage = "https://twingate.com";
     license = licenses.unfree;
     maintainers = [ {
         name = "Anton Shkurenko";
-        email = "anton@twingate.com";
+        email = "support@twingate.com";
     } ];
     platforms = platforms.linux;
   };
