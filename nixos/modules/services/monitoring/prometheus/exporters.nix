@@ -1,7 +1,7 @@
 { config, pkgs, lib, options, ... }:
 
 let
-  inherit (lib) concatStrings foldl foldl' genAttrs literalExample maintainers
+  inherit (lib) concatStrings foldl foldl' genAttrs literalExpression maintainers
                 mapAttrsToList mkDefault mkEnableOption mkIf mkMerge mkOption
                 optional types mkOptionDefault flip attrNames;
 
@@ -32,6 +32,7 @@ let
     "dnsmasq"
     "domain"
     "dovecot"
+    "fastly"
     "fritzbox"
     "influxdb"
     "json"
@@ -108,7 +109,7 @@ let
     firewallFilter = mkOption {
       type = types.nullOr types.str;
       default = null;
-      example = literalExample ''
+      example = literalExpression ''
         "-i eth0 -p tcp -m tcp --dport ${toString port}"
       '';
       description = ''
@@ -203,7 +204,7 @@ in
     };
     description = "Prometheus exporter configuration";
     default = {};
-    example = literalExample ''
+    example = literalExpression ''
       {
         node = {
           enable = true;

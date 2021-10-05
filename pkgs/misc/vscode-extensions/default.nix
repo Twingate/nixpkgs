@@ -8,6 +8,7 @@
 , jdk
 , llvmPackages_8
 , nixpkgs-fmt
+, protobuf
 , jq
 , shellcheck
 , moreutils
@@ -191,6 +192,18 @@ let
 
         meta = with lib; {
           license = licenses.mit;
+        };
+      };
+
+      asvetliakov.vscode-neovim = buildVscodeMarketplaceExtension {
+        mktplcRef = {
+          name = "vscode-neovim";
+          publisher = "asvetliakov";
+          version = "0.0.82";
+          sha256 = "17f0jzg9vdbqdjnnc5i1q28ij2kckvvxi7fw9szmyy754f074jb1";
+        };
+        meta = {
+          license = lib.licenses.mit;
         };
       };
 
@@ -390,6 +403,22 @@ let
         };
         meta = with lib; {
           license = licenses.mit;
+        };
+      };
+
+      davidlday.languagetool-linter = buildVscodeMarketplaceExtension {
+        mktplcRef = {
+          name = "languagetool-linter";
+          publisher = "davidlday";
+          version = "0.18.0";
+          sha256 = "sha256-AYINgq1BMfh7p4xhwSC2Www6dQvyQAGTA45HJsmMGDg=";
+        };
+        meta = with lib; {
+          description = "LanguageTool integration for VS Code";
+          downloadPage = "https://marketplace.visualstudio.com/items?itemName=davidlday.languagetool-linter";
+          homepage = "https://github.com/davidlday/vscode-languagetool-linter";
+          license = licenses.asl20;
+          maintainers = with maintainers; [ ebbertd ];
         };
       };
 
@@ -744,6 +773,18 @@ let
         };
       };
 
+      kamikillerto.vscode-colorize = buildVscodeMarketplaceExtension {
+        mktplcRef = {
+            name = "vscode-colorize";
+            publisher = "kamikillerto";
+            version = "0.11.1";
+            sha256 = "1h82b1jz86k2qznprng5066afinkrd7j3738a56idqr3vvvqnbsm";
+        };
+        meta = {
+          license = lib.licenses.asl20;
+        };
+      };
+
       github = {
         copilot = buildVscodeMarketplaceExtension {
           mktplcRef = {
@@ -897,6 +938,18 @@ let
           publisher = "JakeBecker";
           version = "0.8.0";
           sha256 = "sha256-VD1g4DJfA0vDJ0cyHFDEtCEqQo0nXfPC5vknEU91cPk=";
+        };
+        meta = with lib; {
+          license = licenses.mit;
+        };
+      };
+
+      influxdata.flux = buildVscodeMarketplaceExtension {
+        mktplcRef = {
+          publisher = "influxdata";
+          name = "flux";
+          version = "0.6.5";
+          sha256 = "sha256-rKkZ7Sg8buryFtbIuKsrf3V3Rf7PP8hnbEIRFf4FvSM=";
         };
         meta = with lib; {
           license = licenses.mit;
@@ -1419,6 +1472,18 @@ let
         };
       };
 
+      takayama.vscode-qq = buildVscodeMarketplaceExtension {
+        mktplcRef = {
+          publisher = "takayama";
+          name = "vscode-qq";
+          version = "1.4.0";
+          sha256 = "sha256-DYjNWSKOrDYvdiV7G24uKz6w4ggeYUMkQIiOGZAbMSI=";
+        };
+        meta = {
+          license = lib.licenses.mpl20;
+        };
+      };
+
       tamasfe.even-better-toml = buildVscodeMarketplaceExtension {
         mktplcRef = {
           name = "even-better-toml";
@@ -1651,6 +1716,23 @@ let
           version = "0.0.8";
           sha256 = "1ln9gly5bb7nvbziilnay4q448h9npdh7sd9xy277122h0qawkci";
         };
+        meta = {
+          license = lib.licenses.mit;
+        };
+      };
+
+      zxh404.vscode-proto3 = buildVscodeMarketplaceExtension {
+        mktplcRef = {
+          name = "vscode-proto3";
+          publisher = "zxh404";
+          version = "0.5.4";
+          sha256 = "08dfl5h1k6s542qw5qx2czm1wb37ck9w2vpjz44kp2az352nmksb";
+        };
+        nativeBuildInputs = [ jq moreutils ];
+        postInstall = ''
+          cd "$out/$installPrefix"
+          jq '.contributes.configuration.properties.protoc.properties.path.default = "${protobuf}/bin/protoc"' package.json | sponge package.json
+        '';
         meta = {
           license = lib.licenses.mit;
         };

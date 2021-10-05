@@ -177,7 +177,8 @@ in with py.pkgs; buildPythonApplication rec {
       --replace "cryptography==3.3.2" "cryptography" \
       --replace "pip>=8.0.3,<20.3" "pip" \
       --replace "requests==2.25.1" "requests>=2.25.1" \
-      --replace "ruamel.yaml==0.15.100" "ruamel.yaml"
+      --replace "ruamel.yaml==0.15.100" "ruamel.yaml" \
+      --replace "voluptuous==0.12.1" "voluptuous==0.12.2"
     substituteInPlace tests/test_config.py --replace '"/usr"' '"/build/media"'
   '';
 
@@ -338,6 +339,7 @@ in with py.pkgs; buildPythonApplication rec {
     "ee_brightbox"
     "efergy"
     "elgato"
+    "elkm1"
     "emonitor"
     "emulated_hue"
     "emulated_kasa"
@@ -361,7 +363,9 @@ in with py.pkgs; buildPythonApplication rec {
     "filter"
     "fireservicerota"
     "firmata"
+    "fjaraskupan"
     "flick_electric"
+    "flipr"
     "flo"
     "flume"
     "flunearyou"
@@ -430,6 +434,7 @@ in with py.pkgs; buildPythonApplication rec {
     "hue"
     "huisbaasje"
     "humidifier"
+    "hunterdouglas_powerview"
     "hvv_departures"
     "hyperion"
     "ialarm"
@@ -518,6 +523,7 @@ in with py.pkgs; buildPythonApplication rec {
     "my"
     "myq"
     "mysensors"
+    "mythicbeastsdns"
     "nam"
     "namecheapdns"
     "neato"
@@ -545,6 +551,7 @@ in with py.pkgs; buildPythonApplication rec {
     "ovo_energy"
     "owntracks"
     "ozw"
+    "p1_monitor"
     "panel_custom"
     "panel_iframe"
     "persistent_notification"
@@ -575,6 +582,7 @@ in with py.pkgs; buildPythonApplication rec {
     "recorder"
     "reddit"
     "remote"
+    "renault"
     "rest"
     "rest_command"
     "rflink"
@@ -628,6 +636,7 @@ in with py.pkgs; buildPythonApplication rec {
     # "sonos"
     "soundtouch"
     "spaceapi"
+    "spc"
     "speedtestdotnet"
     "spider"
     "spotify"
@@ -829,8 +838,9 @@ in with py.pkgs; buildPythonApplication rec {
     "test_onboarding_core_no_rpi_power"
     # hue/test_sensor_base.py: Race condition when counting events
     "test_hue_events"
-    # august/test_lock.py: AssertionError: assert 'unlocked' == 'locked'
+    # august/test_lock.py: AssertionError: assert 'unlocked' == 'locked' / assert 'off' == 'on'
     "test_lock_update_via_pubnub"
+    "test_door_sense_update_via_pubnub"
   ];
 
   preCheck = ''

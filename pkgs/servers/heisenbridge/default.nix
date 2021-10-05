@@ -2,18 +2,19 @@
 
 python3Packages.buildPythonPackage rec {
   pname = "heisenbridge";
-  version = "1.1.2";
+  version = "1.2.1";
 
   # Use the release tarball because it has the version set correctly using the
   # version.txt file.
   src = fetchurl {
     url = "https://github.com/hifi/heisenbridge/releases/download/v${version}/heisenbridge-${version}.tar.gz";
-    sha256 = "sha256-hY0dB4QT9W18ubUytvJwRUWKpNQMpyYdSLbmu+c8BCo=";
+    sha256 = "sha256-w+8gsuPlnT1pl+jiZFBYcIAN4agIAcvwkmdysj3+RAQ=";
   };
 
   propagatedBuildInputs = with python3Packages; [
     aiohttp
     irc
+    mautrix
     pyyaml
   ];
 

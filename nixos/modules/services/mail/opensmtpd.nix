@@ -34,7 +34,7 @@ in {
       package = mkOption {
         type = types.package;
         default = pkgs.opensmtpd;
-        defaultText = "pkgs.opensmtpd";
+        defaultText = literalExpression "pkgs.opensmtpd";
         description = "The OpenSMTPD package to use.";
       };
 
@@ -111,7 +111,7 @@ in {
     };
 
     services.mail.sendmailSetuidWrapper = mkIf cfg.setSendmail
-      security.wrappers.smtpctl // { program = "sendmail"; };
+      (security.wrappers.smtpctl // { program = "sendmail"; });
 
     systemd.tmpfiles.rules = [
       "d /var/spool/smtpd 711 root - - -"
