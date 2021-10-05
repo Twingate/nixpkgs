@@ -287,6 +287,13 @@
           <link linkend="opt-programs.pantheon-tweaks.enable">programs.pantheon-tweaks</link>.
         </para>
       </listitem>
+      <listitem>
+        <para>
+          <link xlink:href="https://http://twingate.com/">twingate</link>,
+          replace corporate VPNs with a more secure, usable and
+          performant zero trust access solution.
+        </para>
+      </listitem>
     </itemizedlist>
   </section>
   <section xml:id="sec-release-21.11-incompatibilities">
