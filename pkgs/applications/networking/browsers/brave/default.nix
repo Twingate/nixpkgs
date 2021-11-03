@@ -42,6 +42,7 @@
 , zlib
 , xdg-utils
 , wrapGAppsHook
+, commandLineArgs ? ""
 }:
 
 let
@@ -92,11 +93,11 @@ in
 
 stdenv.mkDerivation rec {
   pname = "brave";
-  version = "1.30.87";
+  version = "1.31.87";
 
   src = fetchurl {
     url = "https://github.com/brave/brave-browser/releases/download/v${version}/brave-browser_${version}_amd64.deb";
-    sha256 = "0mx1vnrip1y87g6zj9sdcf5siihwn0b6v1q106d9kz89znpzd64s";
+    sha256 = "lfkTB8oXxZqgbO7d8cdktSd6ivQc3g5kiAYZKyrrLpw=";
   };
 
   dontConfigure = true;
@@ -156,6 +157,11 @@ stdenv.mkDerivation rec {
       ln -sf ${xdg-utils}/bin/xdg-mime $out/opt/brave.com/brave/xdg-mime
 
       runHook postInstall
+  '';
+
+  preFixup = ''
+    # Add command line args to wrapGApp.
+    gappsWrapperArgs+=(--add-flags ${lib.escapeShellArg commandLineArgs})
   '';
 
   installCheckPhase = ''

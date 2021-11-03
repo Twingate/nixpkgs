@@ -5,9 +5,12 @@
 , python3
 , pkg-config
 , fetchFromGitHub
+, fetchYarnDeps
 }:
 
 let
+  pinData = lib.importJSON ./pin.json;
+
   pkgConfig = {
     node-sass = {
       nativeBuildInputs = [ ];
@@ -20,27 +23,27 @@ let
   };
 
   name = "lemmy-ui";
-  version = "0.12.2";
-in
-mkYarnPackage {
+  version = pinData.version;
 
   src = fetchFromGitHub {
     owner = "LemmyNet";
     repo = name;
     rev = version;
     fetchSubmodules = true;
-    sha256 = "sha256-iFLJqUnz4m9/JTSaJSUugzY5KkiKtH0sMYY4ALm2Ebk=";
+    sha256 = pinData.uiSha256;
   };
+in
+mkYarnPackage {
 
-  inherit pkgConfig name version;
+  inherit src pkgConfig name version;
 
   extraBuildInputs = [ libsass ];
 
-  yarnNix = ./yarn.nix;
-
-  # Fails mysteriously on source/package.json
-  # Upstream package.json is missing a newline at the end
   packageJSON = ./package.json;
+  offlineCache = fetchYarnDeps {
+    yarnLock = src + "/yarn.lock";
+    sha256 = pinData.uiYarnDepsSha256;
+  };
 
   yarnPreBuild = ''
     export npm_config_nodedir=${nodejs}
@@ -57,10 +60,13 @@ mkYarnPackage {
 
   preInstall = ''
     mkdir $out
-    cp -R ./deps/lemmy-ui/dist/assets $out
+    cp -R ./deps/lemmy-ui/dist $out
+    cp -R ./node_modules $out
   '';
 
   distPhase = "true";
+
+  passthru.updateScript = ./update.sh;
 
   meta = with lib; {
     description = "Building a federated alternative to reddit in rust";
@@ -70,4 +76,3 @@ mkYarnPackage {
     platforms = platforms.linux;
   };
 }
-

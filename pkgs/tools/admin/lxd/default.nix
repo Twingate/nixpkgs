@@ -1,22 +1,14 @@
-{ lib, hwdata, pkg-config, lxc, buildGoPackage, fetchurl
+{ lib, hwdata, pkg-config, lxc, buildGoPackage, fetchurl, fetchpatch
 , makeWrapper, acl, rsync, gnutar, xz, btrfs-progs, gzip, dnsmasq, attr
-, squashfsTools, iproute2, iptables, ebtables, iptables-nftables-compat, libcap
+, squashfsTools, iproute2, iptables, libcap
 , dqlite, raft-canonical, sqlite-replication, udev
 , writeShellScriptBin, apparmor-profiles, apparmor-parser
 , criu
 , bash
 , installShellFiles
-, nftablesSupport ? false
 , nixosTests
 }:
 
-let
-  networkPkgs = if nftablesSupport then
-    [ iptables-nftables-compat ]
-  else
-    [ iptables ebtables ];
-
-in
 buildGoPackage rec {
   pname = "lxd";
   version = "4.19";
@@ -27,6 +19,14 @@ buildGoPackage rec {
     url = "https://linuxcontainers.org/downloads/lxd/lxd-${version}.tar.gz";
     sha256 = "0mxbzg8xra0qpd3g3z1b230f0519h56x4jnn09lbbqa92p5zck3f";
   };
+
+  patches = [
+    # lxd/checkfeature: check whether the kernel supports core scheduling
+    (fetchpatch {
+      url = "https://github.com/lxc/lxd/commit/ba6be1043714458b29c4b37687d4f624ee421943.patch";
+      sha256 = "0716129n70c6i695fyi1j8q6cls7g62vkdpcrlfrr9i324y3w1dx";
+    })
+  ];
 
   postPatch = ''
     substituteInPlace shared/usbid/load.go \
@@ -45,7 +45,7 @@ buildGoPackage rec {
     rm $out/bin/{deps,macaroon-identity,generate}
 
     wrapProgram $out/bin/lxd --prefix PATH : ${lib.makeBinPath (
-      networkPkgs
+      [ iptables ]
       ++ [ acl rsync gnutar xz btrfs-progs gzip dnsmasq squashfsTools iproute2 bash criu attr ]
       ++ [ (writeShellScriptBin "apparmor_parser" ''
              exec '${apparmor-parser}/bin/apparmor_parser' -I '${apparmor-profiles}/etc/apparmor.d' "$@"

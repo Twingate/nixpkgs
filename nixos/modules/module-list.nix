@@ -48,6 +48,8 @@
   ./hardware/corectrl.nix
   ./hardware/digitalbitbox.nix
   ./hardware/device-tree.nix
+  ./hardware/gkraken.nix
+  ./hardware/flirc.nix
   ./hardware/i2c.nix
   ./hardware/sensor/hddtemp.nix
   ./hardware/sensor/iio.nix
@@ -389,6 +391,7 @@
   ./services/display-managers/greetd.nix
   ./services/editors/emacs.nix
   ./services/editors/infinoted.nix
+  ./services/finance/odoo.nix
   ./services/games/crossfire-server.nix
   ./services/games/deliantra-server.nix
   ./services/games/factorio.nix
@@ -412,12 +415,14 @@
   ./services/hardware/illum.nix
   ./services/hardware/interception-tools.nix
   ./services/hardware/irqbalance.nix
+  ./services/hardware/joycond.nix
   ./services/hardware/lcd.nix
   ./services/hardware/lirc.nix
   ./services/hardware/nvidia-optimus.nix
   ./services/hardware/pcscd.nix
   ./services/hardware/pommed.nix
   ./services/hardware/power-profiles-daemon.nix
+  ./services/hardware/rasdaemon.nix
   ./services/hardware/ratbagd.nix
   ./services/hardware/sane.nix
   ./services/hardware/sane_extra_backends/brscan4.nix
@@ -543,6 +548,7 @@
   ./services/misc/matrix-appservice-discord.nix
   ./services/misc/matrix-appservice-irc.nix
   ./services/misc/matrix-synapse.nix
+  ./services/misc/mautrix-facebook.nix
   ./services/misc/mautrix-telegram.nix
   ./services/misc/mbpfan.nix
   ./services/misc/mediatomb.nix
@@ -569,6 +575,7 @@
   ./services/misc/plex.nix
   ./services/misc/plikd.nix
   ./services/misc/podgrab.nix
+  ./services/misc/prowlarr.nix
   ./services/misc/tautulli.nix
   ./services/misc/pinnwand.nix
   ./services/misc/pykms.nix
@@ -580,6 +587,7 @@
   ./services/misc/safeeyes.nix
   ./services/misc/sdrplay.nix
   ./services/misc/sickbeard.nix
+  ./services/misc/signald.nix
   ./services/misc/siproxd.nix
   ./services/misc/snapper.nix
   ./services/misc/sonarr.nix
@@ -752,12 +760,12 @@
   ./services/networking/iscsi/root-initiator.nix
   ./services/networking/iscsi/target.nix
   ./services/networking/iwd.nix
+  ./services/networking/jibri/default.nix
   ./services/networking/jicofo.nix
   ./services/networking/jitsi-videobridge.nix
   ./services/networking/kea.nix
   ./services/networking/keepalived/default.nix
   ./services/networking/keybase.nix
-  ./services/networking/kippo.nix
   ./services/networking/knot.nix
   ./services/networking/kresd.nix
   ./services/networking/lambdabot.nix
@@ -777,6 +785,7 @@
   ./services/networking/mstpd.nix
   ./services/networking/mtprotoproxy.nix
   ./services/networking/mullvad-vpn.nix
+  ./services/networking/multipath.nix
   ./services/networking/murmur.nix
   ./services/networking/mxisd.nix
   ./services/networking/namecoind.nix
@@ -833,6 +842,7 @@
   ./services/networking/rpcbind.nix
   ./services/networking/rxe.nix
   ./services/networking/sabnzbd.nix
+  ./services/networking/seafile.nix
   ./services/networking/searx.nix
   ./services/networking/skydns.nix
   ./services/networking/shadowsocks.nix
@@ -882,7 +892,6 @@
   ./services/video/unifi-video.nix
   ./services/networking/v2ray.nix
   ./services/networking/vsftpd.nix
-  ./services/networking/wakeonlan.nix
   ./services/networking/wasabibackend.nix
   ./services/networking/websockify.nix
   ./services/networking/wg-quick.nix
@@ -986,6 +995,8 @@
   ./services/web-apps/jirafeau.nix
   ./services/web-apps/jitsi-meet.nix
   ./services/web-apps/keycloak.nix
+  ./services/web-apps/lemmy.nix
+  ./services/web-apps/invidious.nix
   ./services/web-apps/limesurvey.nix
   ./services/web-apps/mastodon.nix
   ./services/web-apps/mattermost.nix
@@ -996,6 +1007,7 @@
   ./services/web-apps/nexus.nix
   ./services/web-apps/node-red.nix
   ./services/web-apps/pict-rs.nix
+  ./services/web-apps/peertube.nix
   ./services/web-apps/plantuml-server.nix
   ./services/web-apps/plausible.nix
   ./services/web-apps/pgpkeyserver-lite.nix

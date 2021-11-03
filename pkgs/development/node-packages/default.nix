@@ -1,6 +1,7 @@
 { pkgs, nodejs, stdenv, applyPatches, fetchFromGitHub, fetchpatch, fetchurl }:
 
 let
+  inherit (pkgs) lib;
   since = (version: pkgs.lib.versionAtLeast nodejs.version version);
   before = (version: pkgs.lib.versionOlder nodejs.version version);
   super = import ./composition.nix {
@@ -88,6 +89,25 @@ let
           pkgs.lib.makeBinPath [ pkgs.nodejs ]
         }
       '';
+      # See: https://github.com/NixOS/nixpkgs/issues/142196
+      # [...]/@hyperspace/cli/node_modules/.bin/node-gyp-build: /usr/bin/env: bad interpreter: No such file or directory
+      meta.broken = true;
+    };
+
+    mdctl-cli = super."@medable/mdctl-cli".override {
+      nativeBuildInputs = with pkgs; with darwin.apple_sdk.frameworks; [
+        glib
+        libsecret
+        pkg-config
+      ] ++ lib.optionals stdenv.isDarwin [
+        AppKit
+        Security
+      ];
+      buildInputs = with pkgs; [
+        nodePackages.node-gyp-build
+        nodePackages.node-pre-gyp
+        nodejs
+      ];
     };
 
     coc-imselect = super.coc-imselect.override {
@@ -149,6 +169,10 @@ let
     insect = super.insect.override (drv: {
       nativeBuildInputs = drv.nativeBuildInputs or [] ++ [ pkgs.psc-package self.pulp ];
     });
+
+    intelephense = super.intelephense.override {
+      meta.license = pkgs.lib.licenses.unfree;
+    };
 
     jsonplaceholder = super.jsonplaceholder.override (drv: {
       buildInputs = [ nodejs ];
@@ -278,24 +302,22 @@ let
       meta.mainProgram = "postcss";
     };
 
-    prisma = super.prisma.override {
+    prisma = super.prisma.override rec {
       nativeBuildInputs = [ pkgs.makeWrapper ];
-      version = "3.1.1";
+      version = "3.4.0";
       src = fetchurl {
-        url = "https://registry.npmjs.org/prisma/-/prisma-3.1.1.tgz";
-        sha512 = "sha512-+eZtWIL6hnOKUOvqq9WLBzSw2d/EbTmOx1Td1LI8/0XE40ctXMLG2N1p6NK5/+yivGaoNJ9PDpPsPL9lO4nJrQ==";
+        url = "https://registry.npmjs.org/prisma/-/prisma-${version}.tgz";
+        sha512 = "sha512-W0AFjVxPOLW5SEnf0ZwbOu4k8ElX98ioFC1E8Gb9Q/nuO2brEwxFJebXglfG+N6zphGbu2bG1I3VAu7aYzR3VA==";
       };
-      dependencies = [
-        {
-          name = "_at_prisma_slash_engines";
-          packageName = "@prisma/engines";
-          version = "3.1.0-24.c22652b7e418506fab23052d569b85d3aec4883f";
-          src = fetchurl {
-            url = "https://registry.npmjs.org/@prisma/engines/-/engines-3.1.0-24.c22652b7e418506fab23052d569b85d3aec4883f.tgz";
-            sha512 = "sha512-6NEp0VlLho3hVtIvj2P4h0e19AYqQSXtFGts8gSIXDnV+l5pRFZaDMfGo2RiLMR0Kfrs8c3ZYxYX0sWmVL0tWw==";
-          };
-        }
-      ];
+      dependencies = [ rec {
+        name = "_at_prisma_slash_engines";
+        packageName = "@prisma/engines";
+        version = "3.4.0-27.1c9fdaa9e2319b814822d6dbfd0a69e1fcc13a85";
+        src = fetchurl {
+          url = "https://registry.npmjs.org/@prisma/engines/-/engines-${version}.tgz";
+          sha512 = "sha512-jyCjXhX1ZUbzA7+6Hm0iEdeY+qFfpD/RB7iSwMrMoIhkVYvnncSdCLBgbK0yqxTJR2nglevkDY2ve3QDxFciMA==";
+        };
+      }];
       postInstall = with pkgs; ''
         wrapProgram "$out/bin/prisma" \
           --set PRISMA_MIGRATION_ENGINE_BINARY ${prisma-engines}/bin/migration-engine \
@@ -317,26 +339,6 @@ let
         ]}
       '';
     };
-
-    netlify-cli =
-      let
-        esbuild = pkgs.esbuild.overrideAttrs (old: rec {
-          version = "0.13.6";
-
-          src = fetchFromGitHub {
-            owner = "netlify";
-            repo = "esbuild";
-            rev = "v${version}";
-            sha256 = "0asjmqfzdrpfx2hd5hkac1swp52qknyqavsm59j8xr4c1ixhc6n9";
-          };
-
-        });
-      in
-      super.netlify-cli.override {
-        preRebuild = ''
-          export ESBUILD_BINARY_PATH="${esbuild}/bin/esbuild"
-        '';
-      };
 
     ssb-server = super.ssb-server.override {
       buildInputs = [ pkgs.automake pkgs.autoconf self.node-gyp-build ];

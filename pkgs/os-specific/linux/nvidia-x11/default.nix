@@ -19,18 +19,18 @@ rec {
   # Policy: use the highest stable version as the default (on our master).
   stable = if stdenv.hostPlatform.system == "x86_64-linux"
     then generic {
-      version = "470.74";
-      sha256_64bit = "sha256:0snzrb78f283rl92r5cqnr7bdk3yfkqpjac80sqskwi9wgg17r9k";
-      settingsSha256 = "sha256:0hd9973l0zd8a0ia1dysfrk30jqxff1rr07b79ggvqd1xnvv0iqn";
-      persistencedSha256 = "sha256:0i8wfhz53hdnabdcx9awki3nk6xa6dadzn91iswhmfm4jj6964jf";
+      version = "495.44";
+      sha256_64bit = "0j4agxfdswadxkd9hz9j5cq4q3jmhwdnvqclxxkhl5jvh5knm1zi";
+      settingsSha256 = "0v8gqbhjsjjsc83cqacikj9bvs10bq6i34ca8l07zvsf8hfr2ziz";
+      persistencedSha256 = "19rv7vskv61q4gh59nyrfyqyqi565wzjbcfddp8wfvng4dcy18ld";
     }
     else legacy_390;
 
   beta = generic {
-    version = "470.42.01";
-    sha256_64bit = "04w9nmi3vyww07pmgbd2r1x37s5p6xiy4qg9s06a1kjwzpm59xfd";
-    settingsSha256 = "Ohbkm7j0/V0kzcxfsHujBkrdnaefneoLutf2Rju2hIQ=";
-    persistencedSha256 = "1gfj4ffkidbhgjzdi6sv2sngdcb27w7b0rvfnj129rs36mcxy02j";
+    version = "495.29.05";
+    sha256_64bit = "sha256-9yVLl9QAxpJQR5ZJb059j2TpOx4xxCeGCk8hmhhvEl4=";
+    settingsSha256 = "sha256-dcEI+3bxSTwVbHcR6IgvIUFt4vWtK5T4NMGVhmmeVJ0=";
+    persistencedSha256 = "sha256-OT/hOXEPatc6pAKrxDe0jsmaDFCtVXAbdW4elKe6xE8=";
   };
 
   # Vulkan developer beta driver
@@ -43,6 +43,14 @@ rec {
     settingsSha256 = "09v86y2c8xas9ql0bqr7vrjxx3if6javccwjzyly11dzffm02h7g";
     persistencedSha256 = "13s4b73il0lq2hs81q03176n16mng737bfsp3bxnxgnrv3whrayz";
     url = "https://developer.nvidia.com/vulkan-beta-${lib.concatStrings (lib.splitString "." version)}-linux";
+  };
+
+  # Last one supporting Kepler architecture
+  legacy_470 = generic {
+      version = "470.82.00";
+      sha256_64bit = "sha256:0i35frgil917ig1s2qsgqww58h66gabnxz3q39vcl3rlwb0pmgfh";
+      settingsSha256 = "sha256:1kacgifzqqi2zjq62m404w99iv168j5a4xg7xbfnll62vzx7yr5j";
+      persistencedSha256 = "sha256:06qsjp0n872b37wvhnwaddn1nrwn668zskmkcmpx33bv1940apsk";
   };
 
   # Last one supporting x86

@@ -3,25 +3,24 @@
 let
   pname = "plexamp";
   version = "3.7.1";
-  name = "${pname}-${version}";
 
   src = fetchurl {
     url = "https://plexamp.plex.tv/plexamp.plex.tv/desktop/Plexamp-${version}.AppImage";
     name="${pname}-${version}.AppImage";
-    sha512 = "n+ZFfKYUx6silpH4bGNRdh5JJPchjKNzFLAhZQPecK2DkmygY35/ZYUNSBioqxuGKax+I/mY5podmQ5iD95ohQ==";
+    sha512 = "jKuuM1vQANGYE2W0OGl+35mB1ve5K/xPcBTk2O1azPRBDlRVU0DHRSQy2T71kwhxES1ASRt91qAV/dATk6oUkw==";
   };
 
   appimageContents = appimageTools.extractType2 {
-    inherit name src;
+    inherit pname version src;
   };
 in appimageTools.wrapType2 {
-  inherit name src;
+  inherit pname version src;
 
   multiPkgs = null; # no 32bit needed
   extraPkgs = pkgs: appimageTools.defaultFhsEnvArgs.multiPkgs pkgs ++ [ pkgs.bash ];
 
   extraInstallCommands = ''
-    ln -s $out/bin/${name} $out/bin/${pname}
+    ln -s $out/bin/${pname}-${version} $out/bin/${pname}
     install -m 444 -D ${appimageContents}/plexamp.desktop $out/share/applications/plexamp.desktop
     install -m 444 -D ${appimageContents}/plexamp.png \
       $out/share/icons/hicolor/512x512/apps/plexamp.png
