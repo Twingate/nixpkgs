@@ -32,7 +32,7 @@ in {
     '';
 
     # copy from twingate.service
-    # passed as raw text to reset ExecStart, because of weird error: 
+    # passed as raw text to reset ExecStart, because of weird error:
     # twingate.service: Service has more than one ExecStart= setting...
     systemd.units."twingate.service".text = ''
       [Unit]
