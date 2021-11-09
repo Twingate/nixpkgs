@@ -13064,6 +13064,12 @@
     githubId = 6740669;
     name = "Tom Smeets";
   };
+  tonyshkurenko = {
+      email = "support@twingate.com";
+      github = "tonyshkurenko";
+      githubId = 8597964;
+      name = "Anton Shkurenko";
+    };
   toonn = {
     email = "nixpkgs@toonn.io";
     matrix = "@toonn:matrix.org";
