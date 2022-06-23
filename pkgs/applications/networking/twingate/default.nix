@@ -1,26 +1,27 @@
 { autoPatchelfHook
 , curl
 , dpkg
-, dbus_daemon
+, dbus
 , fetchurl
 , lib
 , libnl
-, libudev
+, udev
+, cryptsetup
 , stdenv
 , pkgs
 }:
 
 stdenv.mkDerivation rec {
   pname = "twingate";
-  version = "1.0.12";
+  version = "1.0.39.44791";	#add comment
 
   src = fetchurl {
-    url = "https://binaries.twingate.com/client/linux/DEB/${version}/twingate-amd64.deb";
-    sha256 = "c9865fe6af150580b6d9541c1cb7d6205aa2afe97395dc37b10ba92067c6b935";
+    url = "https://binaries.dev.opstg.com/client/linux/DEB/${version}/twingate-amd64.deb";	#add comment
+    sha256 = "b75dd74627582821d2097024cf4624e2f86d69b8ef6d92f2b9983fc0c628513a";	#add comment
   };
 
-  buildInputs = [ curl libnl libudev ];
-  nativeBuildInputs = [ dbus_daemon.dev dpkg autoPatchelfHook ];
+  buildInputs = [ curl libnl udev cryptsetup ];
+  nativeBuildInputs = [ dbus dpkg autoPatchelfHook ];
 
   unpackCmd = "mkdir root ; dpkg-deb -x $curSrc root";
 
