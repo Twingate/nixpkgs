@@ -13,11 +13,11 @@
 
 stdenv.mkDerivation rec {
   pname = "twingate";
-  version = "1.0.39.44791";	#add comment
+  version = "1.0.39.44791";	#TODO should be changed to release version when new twingate client get released
 
   src = fetchurl {
-    url = "https://binaries.dev.opstg.com/client/linux/DEB/${version}/twingate-amd64.deb";	#add comment
-    sha256 = "b75dd74627582821d2097024cf4624e2f86d69b8ef6d92f2b9983fc0c628513a";	#add comment
+    url = "https://binaries.dev.opstg.com/client/linux/DEB/${version}/twingate-amd64.deb";
+    sha256 = "b75dd74627582821d2097024cf4624e2f86d69b8ef6d92f2b9983fc0c628513a";	#TODO should be changed to release sha when new twingate client get released
   };
 
   buildInputs = [ curl libnl udev cryptsetup ];
