@@ -8,7 +8,6 @@
 , udev
 , cryptsetup
 , stdenv
-, pkgs
 }:
 
 stdenv.mkDerivation rec {
@@ -20,8 +19,8 @@ stdenv.mkDerivation rec {
     sha256 = "b308c422af8a33ecd58e21a10a72c353351a189df67006e38d1ec029a93d5678";
   };
 
-  buildInputs = [ curl libnl udev cryptsetup ];
-  nativeBuildInputs = [ dbus dpkg autoPatchelfHook ];
+  buildInputs = [ dbus curl libnl udev cryptsetup ];
+  nativeBuildInputs = [ dpkg autoPatchelfHook ];
 
   unpackCmd = "mkdir root ; dpkg-deb -x $curSrc root";
 
