@@ -44,7 +44,7 @@ GEM
     influxdb (0.3.13)
       cause
       json
-    jmespath (1.4.0)
+    jmespath (1.6.2)
     json (1.8.6)
     jsonpath (0.5.8)
       multi_json
