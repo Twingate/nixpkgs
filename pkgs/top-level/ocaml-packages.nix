@@ -66,6 +66,8 @@ let
 
     batteries = callPackage ../development/ocaml-modules/batteries { };
 
+    bdd = callPackage ../development/ocaml-modules/bdd { };
+
     benchmark = callPackage ../development/ocaml-modules/benchmark { };
 
     bheap = callPackage ../development/ocaml-modules/bheap { };
@@ -288,6 +290,8 @@ let
     dap =  callPackage ../development/ocaml-modules/dap { };
 
     data-encoding = callPackage ../development/ocaml-modules/data-encoding { };
+
+    dates_calc = callPackage ../development/ocaml-modules/dates_calc {  };
 
     dbf =  callPackage ../development/ocaml-modules/dbf { };
 
@@ -608,6 +612,8 @@ let
     happy-eyeballs-mirage = callPackage ../development/ocaml-modules/happy-eyeballs/mirage.nix { };
 
     hashcons = callPackage ../development/ocaml-modules/hashcons { };
+
+    headache = callPackage ../development/ocaml-modules/headache { };
 
     hex = callPackage ../development/ocaml-modules/hex { };
 
@@ -1040,6 +1046,8 @@ let
 
     mmap =  callPackage ../development/ocaml-modules/mmap { };
 
+    morbig = callPackage ../development/ocaml-modules/morbig { };
+
     mparser =  callPackage ../development/ocaml-modules/mparser { };
 
     mparser-pcre =  callPackage ../development/ocaml-modules/mparser/pcre.nix { };
@@ -1259,8 +1267,6 @@ let
 
     paf-cohttp = callPackage ../development/ocaml-modules/paf/cohttp.nix { };
 
-    paf-le = callPackage ../development/ocaml-modules/paf/le.nix { };
-
     parany = callPackage ../development/ocaml-modules/parany { };
 
     parmap = callPackage ../development/ocaml-modules/parmap { };
@@ -1342,6 +1348,8 @@ let
     ppx_import = callPackage ../development/ocaml-modules/ppx_import {};
 
     ppx_irmin = callPackage ../development/ocaml-modules/irmin/ppx.nix { };
+
+    ppx_monad = callPackage ../development/ocaml-modules/ppx_monad { };
 
     ppx_repr = callPackage ../development/ocaml-modules/repr/ppx.nix { };
 
@@ -1621,6 +1629,8 @@ let
     uri = callPackage ../development/ocaml-modules/uri { };
 
     uri-sexp = callPackage ../development/ocaml-modules/uri/sexp.nix { };
+
+    uring = callPackage ../development/ocaml-modules/uring { };
 
     utop = callPackage ../development/tools/ocaml/utop { };
 

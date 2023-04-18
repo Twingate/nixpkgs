@@ -8,6 +8,8 @@
 , jsoncpp
 , wrapGAppsHook
 , makeDesktopItem
+, openssl
+, olm
 }:
 
 let
@@ -20,7 +22,7 @@ let
 in
 stdenv.mkDerivation {
   inherit version;
-  name = "fluffychat";
+  pname = "fluffychat";
 
   src = fetchzip {
     url = "https://gitlab.com/api/v4/projects/16112282/packages/generic/fluffychat/${version}/fluffychat-${platformMap.${stdenv.hostPlatform.system}}.tar.gz";
@@ -36,7 +38,6 @@ stdenv.mkDerivation {
     genericName = "Chat with your friends (matrix client)";
     categories = [ "Chat" "Network" "InstantMessaging" ];
   };
-
   buildInputs = [ gtk3 libsecret jsoncpp ];
   nativeBuildInputs = [ autoPatchelfHook wrapGAppsHook imagemagick ];
 
@@ -45,7 +46,8 @@ stdenv.mkDerivation {
     mkdir -p $out/share
     mv * $out/share
 
-    ln -s $out/share/fluffychat $out/bin/fluffychat
+    makeWrapper "$out/share/fluffychat" "$out/bin/fluffychat" \
+      --prefix "LD_LIBRARY_PATH" ":" "${lib.makeLibraryPath [ openssl olm ]}"
 
     FAV=$out/share/data/flutter_assets/assets/favicon.png
     ICO=$out/share/icons

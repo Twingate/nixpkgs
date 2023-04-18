@@ -3,15 +3,6 @@ let
   packages = self:
   let
     inherit (self) callPackage;
-
-    replaceAll = x: y: ''
-      echo Replacing "${x}" to "${y}":
-      for file in $(grep -rl "${x}"); do
-        echo -- $file
-        substituteInPlace $file \
-          --replace "${x}" "${y}"
-      done
-    '';
   in {
     #### LIBRARIES
     dtkcommon = callPackage ./library/dtkcommon { };
@@ -32,8 +23,16 @@ let
     util-dfm = callPackage ./library/util-dfm { };
 
     #### CORE
+    dde-app-services = callPackage ./core/dde-app-services { };
     dde-control-center = callPackage ./core/dde-control-center { };
     dde-calendar = callPackage ./core/dde-calendar { };
+    dde-clipboard = callPackage ./core/dde-clipboard { };
+    dde-dock = callPackage ./core/dde-dock { };
+    dde-file-manager = callPackage ./core/dde-file-manager { };
+    dde-launcher = callPackage ./core/dde-launcher { };
+    dde-network-core = callPackage ./core/dde-network-core { };
+    dde-session-shell = callPackage ./core/dde-session-shell { };
+    dde-session-ui = callPackage ./core/dde-session-ui { };
     dde-polkit-agent = callPackage ./core/dde-polkit-agent { };
     dpa-ext-gnomekeyring = callPackage ./core/dpa-ext-gnomekeyring { };
 
@@ -55,12 +54,14 @@ let
     deepin-voice-note = callPackage ./apps/deepin-voice-note { };
 
     #### Go Packages
-    go-lib = callPackage ./go-package/go-lib { inherit replaceAll; };
+    go-lib = callPackage ./go-package/go-lib { };
     go-gir-generator = callPackage ./go-package/go-gir-generator { };
     go-dbus-factory = callPackage ./go-package/go-dbus-factory { };
-    dde-api = callPackage ./go-package/dde-api { inherit replaceAll; };
+    dde-api = callPackage ./go-package/dde-api { };
+    dde-daemon = callPackage ./go-package/dde-daemon { };
     deepin-pw-check = callPackage ./go-package/deepin-pw-check { };
     deepin-desktop-schemas = callPackage ./go-package/deepin-desktop-schemas { };
+    startdde = callPackage ./go-package/startdde { };
 
     #### TOOLS
     dde-device-formatter = callPackage ./tools/dde-device-formatter { };
