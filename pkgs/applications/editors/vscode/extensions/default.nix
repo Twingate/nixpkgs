@@ -669,6 +669,8 @@ let
         };
       };
 
+      contextmapper.context-mapper-vscode-extension = callPackage ./contextmapper.context-mapper-vscode-extension { };
+
       coolbear.systemd-unit-file = buildVscodeMarketplaceExtension {
         mktplcRef = {
           publisher = "coolbear";
@@ -795,6 +797,57 @@ let
           homepage = "https://github.com/denoland/vscode_deno";
           license = lib.licenses.mit;
           maintainers = [ lib.maintainers.ratsclub ];
+        };
+      };
+
+      devsense.composer-php-vscode = buildVscodeMarketplaceExtension {
+        mktplcRef = {
+          name = "composer-php-vscode";
+          publisher = "devsense";
+          version = "1.33.12924";
+          sha256 = "sha256-9Uz8B4qQ57gfETitzRAVEq/Ou/s3jOF/p2EyEDo1jP8=";
+        };
+        meta = {
+          changelog = "https://marketplace.visualstudio.com/items/DEVSENSE.composer-php-vscode/changelog";
+          description = "A visual studio code extension for full development integration for Composer, the PHP package manager.";
+          downloadPage = "https://marketplace.visualstudio.com/items?itemName=DEVSENSE.composer-php-vscode";
+          homepage = "https://github.com/DEVSENSE/phptools-docs";
+          license = lib.licenses.asl20;
+          maintainers = [ lib.maintainers.drupol ];
+        };
+      };
+
+      devsense.phptools-vscode = buildVscodeMarketplaceExtension {
+        mktplcRef = {
+          name = "phptools-vscode";
+          publisher = "devsense";
+          version = "1.33.12924";
+          sha256 = "sha256-ImaGkIe+MTO/utfVh3Giu0+jTSN0mmhgg6LvOod1suE=";
+        };
+        meta = {
+          changelog = "https://marketplace.visualstudio.com/items/DEVSENSE.phptools-vscode/changelog";
+          description = "A visual studio code extension for full development integration for the PHP language.";
+          downloadPage = "https://marketplace.visualstudio.com/items?itemName=DEVSENSE.phptools-vscode";
+          homepage = "https://github.com/DEVSENSE/phptools-docs";
+          license = lib.licenses.asl20;
+          maintainers = [ lib.maintainers.drupol ];
+        };
+      };
+
+      devsense.profiler-php-vscode = buildVscodeMarketplaceExtension {
+        mktplcRef = {
+          name = "profiler-php-vscode";
+          publisher = "devsense";
+          version = "1.33.12924";
+          sha256 = "sha256-6+spMS+oypq8KFW5vsoy0Cmn7RD5L1JQnHSyJAvYhTk=";
+        };
+        meta = {
+          changelog = "https://marketplace.visualstudio.com/items/DEVSENSE.profiler-php-vscode/changelog";
+          description = "A visual studio code extension for PHP and XDebug profiling and inspecting.";
+          downloadPage = "https://marketplace.visualstudio.com/items?itemName=DEVSENSE.profiler-php-vscode";
+          homepage = "https://github.com/DEVSENSE/phptools-docs";
+          license = lib.licenses.asl20;
+          maintainers = [ lib.maintainers.drupol ];
         };
       };
 
@@ -1002,6 +1055,23 @@ let
         };
         meta = {
           license = lib.licenses.mit;
+        };
+      };
+
+      equinusocio.vsc-material-theme = buildVscodeMarketplaceExtension {
+        mktplcRef = {
+          name = "vsc-material-theme";
+          publisher = "Equinusocio";
+          version = "33.8.0";
+          sha256 = "sha256-+I4AUwsrElT62XNvmuAC2iBfHfjNYY0bmAqzQvfwUYM=";
+        };
+        meta = {
+          changelog = "https://marketplace.visualstudio.com/items/Equinusocio.vsc-material-theme/changelog";
+          description = "The most epic theme now for Visual Studio Code";
+          downloadPage = "https://marketplace.visualstudio.com/items?itemName=Equinusocio.vsc-material-theme";
+          homepage = "https://github.com/material-theme/vsc-material-theme";
+          license = lib.licenses.asl20;
+          maintainers = [ lib.maintainers.stunkymonkey ];
         };
       };
 
@@ -1589,8 +1659,8 @@ let
         mktplcRef = {
           name = "magit";
           publisher = "kahole";
-          version = "0.6.39";
-          sha256 = "sha256-B9+McdoC7FkfD4yGDIRUtoF0c7cCUfAeIK1r0/zLVVI=";
+          version = "0.6.40";
+          sha256 = "sha256-AwkjfKBlAl6hTRN1nE6UuUuDXMJUXXDK2+3YzUp9drc=";
         };
         meta = {
           license = lib.licenses.mit;
@@ -1874,8 +1944,8 @@ let
         mktplcRef = {
           name = "direnv";
           publisher = "mkhl";
-          version = "0.10.1";
-          sha256 = "0m89sx1qqdkwa9pfmd9b11lp8z0dqpi6jn27js5q4ymscyg41bqd";
+          version = "0.12.0";
+          sha256 = "sha256-UMGTWAiPAxSjy5ALUkijD0GE9TW37TZ3UvMmgFBNYsU=";
         };
         meta = {
           description = "direnv support for Visual Studio Code";
@@ -2140,6 +2210,23 @@ let
           homepage = "https://github.com/NilsJPWerner/autoDocstring";
           license = lib.licenses.mit;
           maintainers = [ lib.maintainers.kamadorueda ];
+        };
+      };
+
+      nonylene.dark-molokai-theme = buildVscodeMarketplaceExtension {
+        mktplcRef = {
+          name = "dark-molokai-theme";
+          publisher = "nonylene";
+          version = "1.0.5";
+          sha256 = "sha256-2qjV6iSz8DDU1yP1II9sxGSgiETmEtotFvfNjm+cTuI=";
+        };
+        meta = {
+          changelog = "https://marketplace.visualstudio.com/items/nonylene.dark-molokai-theme/changelog";
+          description = "Theme inspired by VSCode default dark theme, monokai theme and Vim Molokai theme";
+          downloadPage = "https://marketplace.visualstudio.com/items?itemName=nonylene.dark-molokai-theme";
+          homepage = "https://github.com/nonylene/vscode-dark-molokai-theme";
+          license = lib.licenses.mit;
+          maintainers = [ lib.maintainers.amz-x ];
         };
       };
 
@@ -2629,8 +2716,8 @@ let
         mktplcRef = {
           name = "code-spell-checker";
           publisher = "streetsidesoftware";
-          version = "2.20.3";
-          sha256 = "sha256-28ybNBobXoq194d9VGD9kOq/OWscJkSlgSZ7ViaNQtw=";
+          version = "2.20.4";
+          sha256 = "sha256-GOXKXZPEynyqRUUY0pdNwt+141kJleg74IbCP4/34R8=";
         };
         meta = {
           changelog = "https://marketplace.visualstudio.com/items/streetsidesoftware.code-spell-checker/changelog";
@@ -3201,6 +3288,9 @@ let
     };
 
   aliases = super: {
+    _1Password = super."1Password";
+    _2gua = super."2gua";
+    _4ops = super."4ops";
     Arjun.swagger-viewer = super.arjun.swagger-viewer;
     jakebecker.elixir-ls = super.elixir-lsp.vscode-elixir-ls;
     jpoissonnier.vscode-styled-components = super.styled-components.vscode-styled-components;
@@ -3209,9 +3299,6 @@ let
     ms-vscode.PowerShell = super.ms-vscode.powershell;
     rioj7.commandOnAllFiles = super.rioj7.commandonallfiles;
     WakaTime.vscode-wakatime = super.wakatime.vscode-wakatime;
-    _1Password = throw ''_1Password has been replaced with "1Password"'';
-    _2gua = throw ''_2gua has been replaced with "2gua"'';
-    _4ops = throw ''_4ops has been replaced with "4ops"'';
   };
 
   # TODO: add overrides overlay, so that we can have a generated.nix

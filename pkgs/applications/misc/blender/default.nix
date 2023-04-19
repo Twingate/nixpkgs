@@ -51,7 +51,7 @@ stdenv.mkDerivation rec {
       libharu
       libepoxy
     ]
-    ++ lib.optional (!stdenv.isAarch64) [
+    ++ lib.optionals (!stdenv.isAarch64) [
       openimagedenoise
       embree
     ]
@@ -73,6 +73,8 @@ stdenv.mkDerivation rec {
   pythonPath = with python310Packages; [ numpy requests ];
 
   postPatch = ''
+    # allow usage of dynamically linked embree
+    rm build_files/cmake/Modules/FindEmbree.cmake
   '' +
     (if stdenv.isDarwin then ''
       : > build_files/cmake/platform/platform_apple_xcode.cmake
