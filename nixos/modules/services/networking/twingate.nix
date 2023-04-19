@@ -8,7 +8,7 @@ let
 in {
 
   options.services.twingate = {
-    enable = mkEnableOption (lib.mdDoc "Twingate Client daemon");
+    enable = mkEnableOption "Twingate Client daemon";
   };
 
   config = mkIf cfg.enable {
@@ -19,7 +19,8 @@ in {
     environment.systemPackages = [ pkgs.twingate ]; # for the CLI
     systemd.packages = [ pkgs.twingate ];
 
-    systemd.services.twingate.preStart = ''
+    system.activationScripts.twingate = stringAfter ["etc"] ''
+      mkdir -p '/etc/twingate'
       cp -r -n ${pkgs.twingate}/etc/twingate/. /etc/twingate/
     '';
 
