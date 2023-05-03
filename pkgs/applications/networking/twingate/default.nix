@@ -12,11 +12,11 @@
 
 stdenv.mkDerivation rec {
   pname = "twingate";
-  version = "1.0.60";
+  version = "1.0.81+79958";
 
   src = fetchurl {
-    url = "https://binaries.twingate.com/client/linux/DEB/${version}/twingate-amd64.deb";
-    sha256 = "b308c422af8a33ecd58e21a10a72c353351a189df67006e38d1ec029a93d5678";
+    url = "https://binaries.dev.opstg.com/client/linux/DEB/x86_64/${version}/twingate-amd64.deb";
+    sha256 = "6c270ba990f8e16d0ffb39f8d36817816ef0627eb2d13305e91c687e6db52912";
   };
 
   buildInputs = [ dbus curl libnl udev cryptsetup ];
