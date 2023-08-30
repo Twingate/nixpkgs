@@ -98,7 +98,7 @@
     "aedes": "0.39.0",
     "mysql": "*",
     "@mysql/xdevapi": "*",
-    "mongodb": "4.13.0",
+    "mongodb": "4.17.0",
     "saslprep": "*",
     "pg": "8.7.1",
     "pgtools": "0.3.2",
