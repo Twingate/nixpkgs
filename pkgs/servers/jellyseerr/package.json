@@ -98,7 +98,7 @@
     "xml2js": "0.4.23",
     "yamljs": "0.3.0",
     "yup": "0.32.11",
-    "zod": "3.20.6"
+    "zod": "3.22.3"
   },
   "devDependencies": {
     "@babel/cli": "7.21.0",
